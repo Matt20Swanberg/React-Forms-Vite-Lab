@@ -1,9 +1,11 @@
 import React from "react";
 
-function Filter({ onCategoryChange }) {
+// Filter component
+// Provides category and search filters for the shopping list.
+function Filter({ onCategoryChange, onSearchChange, search }) {
   return (
     <div className="Filter">
-      <input type="text" name="search" placeholder="Search..." />
+      <input type="text" name="search" placeholder="Search..." onChange={onSearchChange} value={search}/>
       <select name="filter" onChange={onCategoryChange}>
         <option value="All">Filter by category</option>
         <option value="Produce">Produce</option>
