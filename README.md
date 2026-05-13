@@ -121,13 +121,13 @@ App
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Matt20Swanberg/React-Forms-Vite-Lab
 ```
 
 2. Navigate into the project directory:
 
 ```bash
-cd <project-folder>
+cd React-Forms-Vite-Lab
 ```
 
 3. Install dependencies:
