@@ -1,95 +1,151 @@
 # React Controlled Components Lab
 
-## Learning Goals
+## Overview
 
-- Implement a controlled form
+This project expands a Shopping List application using React controlled components. The lab focuses on managing form inputs with React state, lifting state between components, and dynamically rendering filtered data.
 
-## Introduction
+The application supports:
 
-In this lab, you'll write and use controlled components.
+- Filtering shopping list items by category
+- Searching items using a controlled search input
+- Adding new shopping list items through a controlled form
+- Dynamically updating the UI when state changes
 
-## Controlled Components
+---
 
-Now that we know how to handle form elements in React and how to set up
-controlled components, it's time to put that knowledge to the test. This lab is
-fairly extensive, but you'll use many core React concepts here that will surface
-again and again. Time to get some practice in!
+## Features Implemented
 
-We'll continue adding new features to the Shopping List app using controlled
-components. Make sure to familiarize yourself with the code before diving into
-the deliverables! Completing these deliverables will also require understanding
-of all the previous topics from this section, including initializing state,
-passing data and callback functions as props, and working with events.
+### Controlled Search Input
 
-## Deliverables
+A controlled search field was added to the `Filter` component.
 
-### Filter
+#### Functionality
 
-In the filter component, there is a new input field for searching our list.
-_When the user types in this field_, the list of items should be filtered so
-that only items with names that match the text are included.
+- User input is stored in React state
+- The search input stays synchronized with state
+- Items are filtered dynamically as the user types
+- Search supports:
+  - Full matches
+  - Partial matches
+  - Case-insensitive matching
 
-- Determine where you need to add state for this feature. What components need
-  to know about the search text?
+#### State Flow
 
-- Once you've determined which component should hold the state for this feature,
-  set up your initial state, and connect that state to the input field.
-  Remember, we're trying to make this input a _controlled_ input — so the
-  input's value should always be in sync with state.
+```txt
+ShoppingList state
+→ passed to Filter as props
+→ user types in input
+→ state updates
+→ filtered items re-render
+```
 
-- After you've connected the input to state, you'll also need to find a way to
-  _set_ state when the input _changes_. To get the test passing, you'll need to
-  use a prop called `onSearchChange` as a callback.
+---
 
-- Finally, after making those changes, you'll need to use that state value to
-  determine which items are being displayed on the page, similar to how the
-  category dropdown works.
+### Controlled Form Inputs
 
-**Note**: you may be asking yourself, why are we making this input controlled
-when the `<select>` element is not a controlled input? Well, the `<select>`
-input should probably be controlled as well! The tests don't require it, but
-feel free to update the `<select>` element to be a controlled element.
+The `ItemForm` component was updated to use controlled inputs.
 
-### ItemForm
+#### Controlled Fields
 
-There is a new component called `ItemForm` that will allow us to add new items
-to our shopping list. _When the form is submitted_, a new item should be created
-and added to our list of items.
+- Item name input
+- Category select dropdown
 
-- Make all the input fields for this form controlled inputs, so that you can
-  access all the form data via state. When setting the initial state for the
-  `<select>` tag, use an initial value of "Produce" (since that's the first
-  option in the list).
+#### Form Behavior
 
-- Handle the form's _submit_ event, and use the data that you have saved in
-  state to create a new item object with the following properties:
+- Form data is stored in local component state
+- Inputs stay synchronized with state
+- Form submission prevents page refresh
+- A new item object is created and passed upward using callback props
 
-  ```jsx
-  const newItem = {
-    id: uuid(), // the `uuid` library can be used to generate a unique id
-    name: itemName,
-    category: itemCategory,
-  };
-  ```
+---
 
-- Add the new item to the list by updating state. To get the test passing,
-  you'll need to use a prop called `onItemFormSubmit` as a callback and pass the
-  new item to it.
+### Adding New Items
 
-  **NOTE**: to add a new element to an array in state, it's a good idea to use
-  the spread operator:
+New items are added to the shopping list using lifted state.
 
-  ```jsx
-  function addElement(element) {
-    setArray([...array, element]);
-  }
-  ```
+#### Data Flow
 
-  The spread operator allows us to copy all the old values of an array into a
-  new array, and then add new elements as well. When you're working with state,
-  it's important to pass a _new_ array to the state setter function instead of
-  mutating the original array.
+```txt
+ItemForm
+→ creates new item object
+→ calls onItemFormSubmit callback
+→ App updates items state
+→ ShoppingList re-renders
+```
 
-## Resources
+---
 
-- [React Forms](https://facebook.github.io/react/docs/forms.html)
+## React Concepts Practiced
+
+This lab reinforced the following React concepts:
+
+- `useState`
+- Controlled components
+- Event handling
+- Callback props
+- Lifting state up
+- Filtering arrays with `.filter()`
+- Rendering lists with `.map()`
+- Immutable state updates using the spread operator
+
+---
+
+## Component Structure
+
+```txt
+App
+└── ShoppingList
+    ├── ItemForm
+    ├── Filter
+    └── Item
+```
+
+---
+
+## Technologies Used
+
+- React
+- JavaScript (ES6)
+- Vite
+
+---
+
+## Screenshot
+
+![React-Forms-Vite-dark](./screenshots/dark-mode.png) ![React-Forms-Vite-light](./screenshots/light-mode.png)
+
+---
+
+## How to Run the Project
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+2. Navigate into the project directory:
+
+```bash
+cd <project-folder>
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+5. Open the local development URL provided in the terminal.
+
+---
+
+## Author
+
+Created by Matthew Swanberg as part of a lab for course 4 mod 6.
